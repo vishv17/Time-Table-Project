@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mainPage">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Home</title>
+
+
+  <style>
+    #preloader {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      background-color: white;
+      z-index: 9999;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #333;
+      border-radius: 100%;
+      -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+      animation: sk-scaleout 1.0s infinite ease-in-out;
+    }
+
+    @-webkit-keyframes sk-scaleout {
+      0% {
+        -webkit-transform: scale(0)
+      }
+      100% {
+        -webkit-transform: scale(1.0);
+        opacity: 0;
+      }
+    }
+
+    @keyframes sk-scaleout {
+      0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      }
+      100% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+        opacity: 0;
+      }
+    }
+  </style>
+
+{% load static %}
+
+  <link rel="shortcut icon" href='{% static "images/favicon.ico" %}' type="image/x-icon">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css"> -->
+</head>
+
+<body style="display: grid;">
+
+
+  <!-- <div id="preloader">
+    <img style="margin:auto; position:absolute; top:0; bottom:0; left:0; right:0;" src="./images/timer.gif" alt="loading...">
+  </div> -->
+
+  <div id="preloader">
+    <div class="spinner"></div>
+  </div>
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li class="active">
+          <a href="index.html">Home</a>
+        </li>
+        <li>
+          <a href="about.html">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  
+{% block body %}
+{% endblock %}
+
+
+
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
+  <!-- <link rel="stylesheet" href="fonts/icon.css"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+  <!-- <script type="text/javascript" src="js/angular.min.js"></script> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+  <!-- <script src="js/angular-route.min.js"></script> -->
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+  <script src="{% static 'js/AngularScript.js' %}"></script>
+
+  <script src="{% static 'js/preloader.js' %}" async></script>
+
+  <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+
+</body>
+
+
+</html>

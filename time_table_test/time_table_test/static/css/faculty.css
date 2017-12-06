@@ -1,0 +1,91 @@
+#page-faculties {
+    background-color: #eee;
+}
+
+.faculty {
+    display: inline-table
+}
+
+.faculty>.card.card-color {
+    float: left;
+    width: 300px;
+    display: inline-table;
+}
+
+.card-color {
+    background-color: #8d8d8d !important;
+}
+
+.card-color.lighten {
+    background-color: #BBBBBB !important;
+}
+
+.no-Margin,
+.no-Margin a,
+.no-Margin input {
+    margin: 0px !important;
+}
+
+.trans_cyan {
+    background-color: #00bcd4 !important;
+}
+
+.btn-flat {
+    width: 100%;
+}
+
+@media only screen and (max-width:380px) {
+    .faculty>.card.card-color,
+    div#subjectsDiv {
+        width: calc(100vw - 80px) !important;
+    }
+}
+
+@media only screen and (max-width:765px) {
+    div#subjectsDiv {
+        float: right;
+    }
+}
+
+@media only screen and (min-width:992px) {
+    .nav-header-wrapper {
+        margin: 0px 30px;
+    }
+}
+
+.row-flex {
+    /* display: flex; */
+}
+
+.btn-add {
+    height: 205;
+    padding: 0px 1rem;
+}
+
+
+/*------------------- Lazy loading items ------------------*/
+
+div#subjectsDiv {
+    display: inline-table;
+    width: 300px;
+    margin-left: 50px;
+}
+
+#subjectsDiv .card-content {
+    margin-bottom: 0px;
+}
+
+#input-divs {
+    margin: 20px auto;
+}
+
+#daysDiv {
+    display: none;
+}
+
+#btnProceed {
+    display: none;
+}
+
+
+/*----------------------------------------------------------*/
