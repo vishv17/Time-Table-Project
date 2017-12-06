@@ -1,0 +1,247 @@
+{% extends 'timetable/base.html' %}
+
+{% load vt %}
+{% load static %}
+{% block body %}
+
+{% verbatim %}
+<div ng-controller="dashboardPageController">
+  <div class="content-wrapper" ng-init="initialize(); CheckData();" >
+    <div id="classes">
+      <div class="row">
+        <div class="col s12">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Classes</span>
+              <ul id="ClassUL" class="collapsible popout" data-collapsible="accordion">
+                <li ng-repeat="class in classes" ng-if="hasClasses">
+                  <div class="collapsible-header">
+                    <i class="material-icons">class</i>
+                    <span>{{class.name}}</span>
+                    <span class="note">[ Click me to expand ]</span>
+                  </div>
+                  <div class="collapsible-body">
+                    <div class="collection">
+                      <a href="#showFaculty" ng-repeat="subject in class.subjects" ng-click="getFaculties($parent.$index, $index, subject)" class="collection-item waves-effect waves-light btn modal-trigger">{{subject.name}}</a>
+                      <p ng-if="!class.subjects.length" class="no-data">no Sub</p>
+                    </div>
+                    <!-- use index -->
+                    <a href="#addSubjectModal" ng-click="newSub_Class($index)" class="btn-floating tooltipped halfway-fab waves-effect waves-light red modal-trigger"
+                      data-position="left" data-delay="50" data-tooltip="Add Subject">
+                      <i class="material-icons">add</i>
+                      <!-- btn for add subject -->
+                    </a>
+                  </div>
+                </li>
+                <p ng-hide="hasClasses" class="no-data">No Classes</p>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--Modal for adding new Subject-->
+  <form ng-submit="addNewSubject()">
+    <div id="addSubjectModal" class="modal modal-fixed-footer" style="min-width: 300px">
+      <div class="modal-content" style="padding: 12px 12px 0px">
+        <h5 style="margin-left: 8px">Add Subject</h5>
+        <div class="row">
+
+          <div class="col s12" style="padding: 0">
+            <div class="row">
+              <div class="input-field col s12 m4">
+                <i class="material-icons prefix" style="line-height: 50px;">subject</i>
+                <input ng-model="newSub.Sub_Name" id="SubjectName" type="text" class="validate" style="line-height: 50px;">
+                <label for="SubjectName">Name</label>
+              </div>
+
+              <!-- ADDED -->
+              <div class="input-field col s12 m4">
+                <i class="material-icons prefix" style="line-height: 50px;">local_activity</i>
+                <input ng-model="newSub.Sub_Code" id="SubjectCode" type="number" class="validate" style="line-height: 50px;">
+                <label for="SubjectCode">Subject Code</label>
+              </div>
+              <!-- /ADDED -->
+
+              <div class="input-field col s12 m4">
+                <i class="material-icons prefix" style="line-height: 50px;">donut_large</i>
+                <input ng-model="newSub.Sub_Load" id="SubjectLoad" type="number" class="validate" style="line-height: 50px;">
+                <label for="SubjectLoad">Subject Load</label>
+              </div>
+            </div>
+
+            <div class="row mb-0">
+              <div class="col s3 m2">
+                Type:
+              </div>
+              <div class="col s9 m10">
+                <div class="row mb-0">
+
+                  <div class="col s12 m3">
+                    <input ng-model="isLecture" type="checkbox" id="isLecture" />
+                    <label for="isLecture">Lecture</label>
+                  </div>
+                  <div class="col s12 m3">
+                    <input ng-model="isLAB" type="checkbox" id="isLAB" />
+                    <label for="isLAB">LAB</label>
+                  </div>
+                  <div class="col s12 m3">
+                    <input ng-model="isTutorial" type="checkbox" id="isTutorial" />
+                    <label for="isTutorial">Tutorial</label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- <div class="col s3 m2"></div> -->
+              <div class="col s9 offset-s3 offset-m2 m10">
+                <div class="row">
+                  <div ng-show="isLecture" class="input-field col s12 m4">
+                    <input ng-model="newSub.Sub_n_lec" value="0" id="NoOfLectures" type="number" class="validate md-0">
+                    <label for="NoOfLectures">No of Lectures</label>
+                  </div>
+                  <div ng-show="isLAB" class="input-field col s12 m4">
+                    <input ng-model="newSub.Sub_n_lab" value="0" id="NoOfLABs" type="number" class="validate">
+                    <label for="NoOfLABs">No of LABs</label>
+                  </div>
+                  <div ng-show="isTutorial" class="input-field col s12 m4">
+                    <input ng-model="newSub.Sub_n_tut" value="0" id="NoOfTutorial" type="number" class="validate md-0">
+                    <label for="NoOfTutorial">No of Tutorial</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" value="CREATE" class="modal-action modal-close waves-effect waves-green btn-flat" />
+      </div>
+    </div>
+  </form>
+  <!--END of Modal for adding new Subject-->
+
+
+
+  <!-- Modal Structure for faculty -->
+  <div id="showFaculty" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Faculties</h4>
+
+      <ul class="collection">
+        <li class="collection-item avatar" ng-repeat="faculty in subjectFaculties">
+          <i class="material-icons circle green">account_circle</i>
+          <span class="title">{{faculty.name}}</span>
+          <p>work load: {{faculty.work_load}}
+          </p>
+          <a href="#!" class="secondary-content">
+            <i class="material-icons">grade</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <span style="float: left;margin: 14px 22px 0px">Subject load: {{subjectLoad}}</span>
+      <a href="#addFacultyModal" style="margin:0px" class="modal-action btn-floating waves-effect waves-light waves-green red modal-trigger">
+        <i class="material-icons">add</i>
+        <!-- Button of add Faculty -->
+      </a>
+    </div>
+  </div>
+  <!-- End of Modal Structure for faculty -->
+
+  <!--Modal for adding new Faculty-->
+  <form ng-submit="addNewFaculty()">
+    <div id="addFacultyModal" class="modal modal-fixed-footer" style="min-width: 300px">
+      <div class="modal-content" style="padding: 12px 12px 0px">
+        <h5 style="margin-left: 8px">Add Faculty</h5>
+        <div class="row">
+
+          <div class="col s12" style="padding: 0">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix" style="line-height: 50px;">contacts</i>
+                <select ng-model="newFac.name">
+                  <option value="" disabled selected>Choose Faculty</option>
+                  <optgroup label="Position 1">
+                    <option value="Faculty 1">Faculty 1</option>
+                    <option value="Faculty 2">Faculty 2</option>
+                  </optgroup>
+                  <optgroup label="Position 2">
+                    <option value="Faculty 3">Faculty 3</option>
+                    <option value="Faculty 4">Faculty 4</option>
+                  </optgroup>
+                </select>
+                <label>Faculties</label>
+              </div>
+
+              <div class="input-field col s12">
+                <i class="material-icons prefix" style="line-height: 50px;">donut_large</i>
+                <input ng-model="newFac.load" id="SubjectLoad" type="number" class="validate" style="line-height: 50px;">
+                <label for="SubjectLoad">Work Load</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" value="ADD" class="modal-action modal-close waves-effect waves-green btn-flat" />
+      </div>
+    </div>
+  </form>
+  <!--END of Modal for adding new Faculty-->
+
+
+  <div class="fixed-action-btn">
+    <a id="btnAddClass" href="#addClassModal" class="btn-floating waves-effect waves-light red modal-trigger">
+      <i class="material-icons">add</i>
+      <!-- Button of add Class -->
+    </a>
+  </div>
+
+  <!--Modal for adding new class-->
+  <div id="addClassModal" class="modal" style="max-width: 450px">
+    <div class="modal-content">
+      <h5>Add Class</h5>
+      <div class="row">
+
+        <form class="col s12 p-0">
+          <div class="row">
+            <div class="input-field col s12 p-0">
+              <i class="material-icons prefix">class</i>
+              <input ng-model="NewClassName" id="ClassName" type="text" class="validate">
+              <label for="ClassName">Name of Class</label>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a ng-click="CreateNewClass()" class="modal-action modal-close waves-effect waves-green btn-flat">Create</a>
+    </div>
+  </div>
+  <!--END of Modal for adding new class-->
+
+
+  <!-- Tap Target Structure for button animation in starting -->
+  <div class="tap-target" data-activates="btnAddClass">
+    <div class="tap-target-content">
+      <h4>Info</h4>
+      <p>Button to add new Class</p>
+    </div>
+  </div>
+</div>
+
+{% endverbatim %}
+
+<link rel="stylesheet" href="{% static 'css/index.css' %}" media="none" onload="if(media!='all')media='all'">
+{% endblock %}  

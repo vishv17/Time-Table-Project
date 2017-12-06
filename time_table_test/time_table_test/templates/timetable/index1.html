@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	{% csrf_token %}
+	<ul>
+	{% for class in classes %}
+		{% for x in class %}
+			<li>{{x.name}}</li>
+
+	<!-- {% for x in class %}
+	<li>{{x.0}}-{{x.1}}-{{x.2}}-{{x.3}}</li>
+
+	{% endfor %} -->
+		{% endfor %}
+	{% endfor %}
+	</ul>
+</body>
+</html>

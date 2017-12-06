@@ -1,0 +1,107 @@
+{% extends 'timetable/base.html' %}
+
+{% load vt %}
+
+{% load static %}
+{% block body %}
+
+{% verbatim %}
+<div ng-init="initialize(); getData();" ng-controller="timetablePageController" class="timetable-container container">
+    <table class="striped">
+        <thead>
+            <tr>
+                <form action="" method="">
+                    <td style="max-width:70px">
+                        <div class="input-field">
+                            <select>
+                                <option value="" disabled selected>Choose</option>
+                                <option value="1">Sem 1</option>
+                                <option value="2">Sem 2</option>
+                                <option value="3">Sem 3</option>
+                            </select>
+                            <label>Sememster</label>
+                        </div>
+                    </td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>                
+                </form>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>MON<span>DAY</span></td>
+                <td>PHYSICS <span>[ 210207 ]</span></td>
+                <td>CPU <span>[ 210205 ]</span> </td>
+                <td>CPD <span>[ 210202 ]</span> </td>
+                <td>EME <span>[ 210206 ]</span> </td>
+                <td>DE <span>[ 210201 ]</span> </td>
+                <td>MATHS <span>[ 210203 ]</span> </td>
+                <td>CPU (LAB) <span>[ 210205 ]</span> </td>
+            </tr>
+            <tr>
+                <td>TUE<span>SDAY</span></td>
+                <td>CPU <span>[ 210205 ]</span> </td>
+                <td>CPD <span>[ 210202 ]</span> </td>
+                <td>EME <span>[ 210206 ]</span> </td>
+                <td>DE <span>[ 210201 ]</span> </td>
+                <td>MATHS <span>[ 210203 ]</span> </td>
+                <td>CPU (LAB) <span>[ 210205 ]</span> </td>
+                <td>CPU (LAB) <span>[ 210205 ]</span> </td>
+            </tr>
+            <tr>
+                <td>WED<span>NESDAY</span></td>
+                <td>CPD <span>[ 210202 ]</span> </td>
+                <td>EME (LAB) <span>[ 210206 ]</span> </td>
+                <td>DE <span>[ 210201 ]</span> </td>
+                <td>MATHS <span>[ 210203 ]</span> </td>
+                <td>CPU <span>[ 210205 ]</span> </td>
+                <td>PHYSICS <span>[ 210207 ]</span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>THU<span>RSDAY</span></td>
+                <td>EME <span>[ 210206 ]</span> </td>
+                <td>DE <span>[ 210201 ]</span> </td>
+                <td>MATHS <span>[ 210203 ]</span> </td>
+                <td>CPD <span>[ 210202 ]</span> </td>
+                <td>CPU <span>[ 210205 ]</span> </td>
+                <td>PHYSICS <span>[ 210207 ]</span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>FRI<span>DAY</span></td>
+                <td>PHYSICS <span>[ 210207 ]</span></td>
+                <td>EME <span>[ 210206 ]</span> </td>
+                <td>DE <span>[ 210201 ]</span> </td>
+                <td>MATHS <span>[ 210203 ]</span> </td>
+                <td>CPD <span>[ 210202 ]</span> </td>
+                <td>EME (LAB) <span>[ 210206 ]</span> </td>
+                <td>EME (LAB) <span>[ 210206 ]</span> </td>
+            </tr>
+            <tr>
+                <td>SAT<span>DAY</span></td>
+                <td>EME <span>[ 210206 ]</span> </td>
+                <td>PHYSICS <span>[ 210207 ]</span></td>
+                <td>DE <span>[ 210201 ]</span> </td>
+                <td>CPD <span>[ 210202 ]</span> </td>
+                <td>CPU <span>[ 210205 ]</span> </td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+{% endverbatim %}
+
+<link rel="stylesheet" href="{% static 'css/timetable.css' %}" media="none" onload="if(media!='all')media='all'">
+<!-- <link rel="stylesheet" href="css/timetable.css" async> -->
+
+
+{% endblock %}  

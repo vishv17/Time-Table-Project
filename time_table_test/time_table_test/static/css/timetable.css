@@ -1,0 +1,42 @@
+/* #9c0000 - Red Velvet */
+/* #34495e - Night Blue */
+
+.timetable-container{
+    margin-top: 30px;
+}
+table{
+    border: 3px solid #34495e;
+    border-radius: 10px;
+    border-collapse: unset;
+}
+input{
+    margin: 0px !important;
+}
+thead > tr{
+    background-color: #34495e;
+}
+thead td, td:first-child{
+    color: #f1f8ff;
+}
+tbody td:first-child{
+    background-color: rgba(52, 73, 94, 0.7);
+}
+td {
+    text-align: center;
+    border-radius: 0px;
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+td:not(:first-child) > span{
+    display: block;
+}
+@media (min-width: 993px){
+    td{
+        font-size: 14px;
+    }
+}
+@media (max-width: 700px){
+    tbody td:first-child > span{
+        display: none;
+    }
+}
